@@ -1,0 +1,171 @@
+openapi: 3.0.1
+servers:
+  - description: Index swagger
+    #url local
+    url: https://localhost:8080
+
+    #url produccion
+    #url: https://api.mibanco.com.co
+info:
+  description: Servicio de entidad ClienteCdtDigitalES.
+  version: 0.0.1
+  title: ClienteCDTDigitalES
+  contact:
+    name: MiBanco
+    url: https://www.mibanco.com.co/
+    email: api@mibanco.com.co
+  license:
+    name: GNU GPLv3
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+tags:
+  - name: Cliente cdt digital
+    description: Cliente cdt digital
+
+#----------------------------
+#Endpoints de la Entidad
+#----------------------------
+paths:
+  /v1/es/clienteCDT:
+    post:
+      tags:
+        - Crear cliente cdt digital
+      operationId: crearClienteCDTDigital
+      requestBody:
+        description: Crear cliente cdt digital
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClienteCDTDigitalTypeInput"
+      responses:
+        "200":
+          description: Cliente cdt digital creado.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClienteCDTDigitalTypeResponse"
+        "400":
+          description: "Parámetros de entrada no validos."
+        "404":
+          description: "No se encuentra el cliente."
+
+  /v1/es/listarClienteCDT/{idCliente}:
+    get:
+      tags:
+        - Listar cliente cdt digital
+      parameters:
+        - in: path
+          name: idCliente
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The client ID
+      operationId: listarClienteCDTDigital
+      responses:
+        "200":
+          description: Cliente cdt digital encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClienteCDTDigitalTypeResponse"
+        "400":
+          description: "Parámetros de entrada no validos."
+        "404":
+          description: "No se encuentra el cliente."
+  /v1/es/eliminarClienteCDT/{idCliente}:
+    delete:
+      tags:
+        - Eliminar cliente cdt digital
+      parameters:
+        - in: path
+          name: idCliente
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The client ID
+      operationId: eliminarClienteCDTDigital
+      responses:
+        "200":
+          description: Cliente cdt digital eliminado.
+        "400":
+          description: "Parámetros de entrada no validos."
+        "404":
+          description: "No se encuentra el cliente."
+  /v1/es/actualizarClienteCDT/{idCliente}:
+    put:
+      tags:
+        - Actualizar cliente cdt digital
+      parameters:
+        - in: path
+          name: idCliente
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The client ID
+      operationId: actualizarClienteCDTDigital
+      requestBody:
+        description: actualizar cliente cdt digital
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClienteCDTDigitalTypeInput"
+      responses:
+        "200":
+          description: Cliente cdt digital eliminado.
+        "400":
+          description: "Parámetros de entrada no validos."
+        "404":
+          description: "No se encuentra el cliente."
+#----------------------------
+#Se declaran los modelos/schemas del servicio
+#----------------------------
+components:
+  schemas:
+    ClienteCDTDigitalTypeResponse:
+      type: object
+      properties:
+        idCliente:
+          type: integer
+        tipoTelefonoPrincipal:
+          type: string
+        telefonoPrincipal:
+          type: string
+        tipoCorreoElectronico:
+          type: string
+        fechaNacimientoDia:
+          type: integer
+        fechaNacimientoMes:
+          type: integer
+        fechaNacimientoAno:
+          type: integer
+        lugarNacimientoPais:
+          type: string
+        lugarNacimientoDpto:
+          type: string
+        lugarNacimientoCiudad:
+          type: string
+    ClienteCDTDigitalTypeInput:
+      type: object
+      properties:
+        idCliente:
+          type: integer
+        tipoTelefonoPrincipal:
+          type: string
+        telefonoPrincipal:
+          type: string
+        tipoCorreoElectronico:
+          type: string
+        fechaNacimientoDia:
+          type: integer
+        fechaNacimientoMes:
+          type: integer
+        fechaNacimientoAno:
+          type: integer
+        lugarNacimientoPais:
+          type: string
+        lugarNacimientoDpto:
+          type: string
+        lugarNacimientoCiudad:
+          type: string
