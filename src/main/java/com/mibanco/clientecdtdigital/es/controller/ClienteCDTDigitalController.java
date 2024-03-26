@@ -26,20 +26,16 @@ public class ClienteCDTDigitalController implements V1ClienteCDTDigitalApi {
 
     @Override
     public Response crearClienteCDTDigital(ClienteCDTDigitalTypeInput clienteCDTDigitalTypeInput){
-
         LOG.info("Inicia crearClienteCDTDigital controller");
         ClienteCDTDigitalTypeResponse clienteCDTDigitalType = null;
-
         try{
             clienteCDTDigitalType = clienteCDTDigitalServiceImpl.crearClienteCDTDigital(clienteCDTDigitalTypeInput);
         }catch (ApplicationException e){
-            LOG.error(Constant.ERROR_SERVICIO + e.getMessage() + " crearCLienteVCDTDigitalController");
+            LOG.error(Constant.ERROR_SERVICIO + e.getMessage() + " crearClienteCDTDigitalController");
             return Response.status(Response.Status.BAD_REQUEST).entity(clienteCDTDigitalType).build();
         }
         LOG.info("Finaliza crearClienteCDTDigital controller");
         return Response.status(Response.Status.CREATED).entity(clienteCDTDigitalType).build();
-
-
     }
 
     @Override
